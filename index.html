@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Load Games - Sua Loja de Games</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary: #ff6b00;
+      --secondary: #ff9900;
+      --dark: #1a1a1a;
+      --light: #f8f8f8;
+      --gray: #444;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+      color: var(--light);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 107, 0, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 153, 0, 0.05) 0%, transparent 20%);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background: rgba(30, 30, 30, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CABEÇALHO COM LOGO ANIMADA */
+    .header {
+      padding: 40px 20px 20px;
+      text-align: center;
+      position: relative;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
+url('https://github.com/allansantanatucker/loadgames/blob/main/LOJA1.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+
+    /* CONTAINER DA LOGO AUMENTADO */
+    .logo-container {
+      width: 320px; /* AUMENTADO */
+      height: 160px; /* AUMENTADO */
+      margin: 0 auto 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      position: relative;
+      z-index: 1;
+      animation: pulse 2s infinite, float 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* IMAGEM DA LOGO AJUSTADA */
+    .logo img {
+      width: 100%; /* AJUSTADO */
+      height: auto; /* AJUSTADO */
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 15px rgba(255, 153, 0, 0.5));
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 300;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--secondary);
+      font-size: 18px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-icon:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 20px 0 15px;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title i {
+      font-size: 20px;
+    }
+
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 107, 0, 0.15);
+      border-color: rgba(255, 107, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn.save-contact {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 153, 0, 0.2));
+      border: 1px solid rgba(255, 153, 0, 0.3);
+      grid-column: span 2;
+    }
+
+    .btn.save-contact:hover {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.3), rgba(255, 153, 0, 0.3));
+    }
+
+    .btn i {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: var(--secondary);
+    }
+
+    .btn .label {
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .btn .subtext {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    .wifi-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .wifi-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .wifi-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wifi-name {
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--secondary);
+    }
+
+    .wifi-password {
+      font-size: 14px;
+      color: #aaa;
+      letter-spacing: 2px;
+    }
+
+    .copy-btn {
+      background: rgba(255, 107, 0, 0.2);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .address-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .address-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .address-item:hover {
+      background: rgba(255, 107, 0, 0.1);
+      transform: translateX(5px);
+    }
+
+    .address-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .address-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 107, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      color: var(--secondary);
+      flex-shrink: 0;
+    }
+
+    .address-details {
+      flex: 1;
+    }
+
+    .address-title {
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .address-title::after {
+      content: "↗";
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .address-text {
+      font-size: 14px;
+      color: #aaa;
+      line-height: 1.5;
+    }
+    
+    .address-note {
+      font-size: 12px;
+      color: #ff9900;
+      margin-top: 5px;
+      font-style: italic;
+    }
+
+    /* CORREÇÃO PARA AS ESTRELAS */
+    .google-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 15px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      flex-wrap: wrap;
+    }
+
+    .rating-stars {
+      color: #FFD700;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+
+    .rating-value {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      flex-shrink: 0;
+    }
+
+    .rating-text {
+      font-size: 14px;
+      color: #aaa;
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .review-btn {
+      background: rgba(255, 107, 0, 0.2);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 15px;
+      color: var(--secondary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .review-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .footer {
+      padding: 20px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(40, 40, 40, 0.9);
+      color: var(--secondary);
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 500;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 107, 0, 0.3);
+      transition: transform 0.5s ease, opacity 0.3s ease;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .contact-card {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .contact-card.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .card-content {
+      background: rgba(30, 30, 30, 0.95);
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 153, 0, 0.3);
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    
+    .contact-card.show .card-content {
+      transform: scale(1);
+    }
+    
+    .card-content h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--secondary);
+    }
+    
+    .card-content p {
+      margin: 10px 0;
+      color: #aaa;
+      text-align: left;
+      padding-left: 30px;
+      position: relative;
+    }
+    
+    .card-content p i {
+      position: absolute;
+      left: 0;
+      top: 5px;
+      color: var(--secondary);
+      width: 24px;
+      text-align: center;
+    }
+    
+    .card-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+    
+    .card-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .card-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .card-btn.secondary {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .close-card {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .close-card:hover {
+      color: var(--secondary);
+    }
+
+    .product-showcase {
+      margin: 25px 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .product-title {
+      font-size: 20px;
+      color: var(--secondary);
+      margin-bottom: 15px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .product-item {
+      background: rgba(30, 30, 30, 0.8);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .product-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-image {
+      height: 120px;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 40px;
+    }
+
+    .product-name {
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .address-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      .buttons-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn.save-contact {
+        grid-column: span 1;
+      }
+      
+      .logo-container {
+        width: 280px; /* AUMENTADO */
+        height: 140px; /* AUMENTADO */
+      }
+      
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .google-rating {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      
+      .rating-stars {
+        font-size: 18px;
+      }
+      
+      .rating-value {
+        font-size: 22px;
+      }
+      
+      .rating-text {
+        min-width: auto;
+      }
+      
+      .review-btn {
+        align-self: stretch;
+        text-align: center;
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .rating-stars {
+        font-size: 16px;
+      }
+      
+      .rating-value {
+        font-size: 20px;
+      }
+      
+      .rating-text {
+        font-size: 13px;
+      }
+      
+      .logo-container {
+        width: 240px; /* AUMENTADO */
+        height: 120px; /* AUMENTADO */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="container">
+    <div class="header">
+      <div class="logo-container">
+        <div class="logo">
+          <!-- SUA LOGO PNG AQUI -->
+          <img src="https://github.com/allansantanatucker/loadgames/blob/main/logo%202.png" alt="Load Games Logo">
+        </div>
+      </div>
+      <p class="subtitle">Consoles, acessórios e games com os melhores preços!</p>
+
+      
+      <div class="social-links">
+        <a href="https://wa.me/551128620607" class="social-icon" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/loadgamesoficial/" class="social-icon" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/loadgamesoficial" class="social-icon" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.tiktok.com/@loadgamesoficial" class="social-icon" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="content">
+      <div class="buttons-grid">
+        <a href="https://wa.me/551128620607" class="btn" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          <span class="label">WhatsApp</span>
+          <span class="subtext">(11) 2862-0607</span>
+        </a>
+        
+        <a href="tel:+551128620607" class="btn">
+          <i class="fas fa-phone"></i>
+          <span class="label">Telefone</span>
+          <span class="subtext">Ligar agora</span>
+        </a>
+        
+        <a href="#" class="btn" onclick="copyToClipboard('14.451.482/0001-00', 'Chave PIX copiada!')">
+          <i class="fas fa-qrcode"></i>
+          <span class="label">PIX</span>
+          <span class="subtext">CNPJ: 14.451.482/0001-00</span>
+        </a>
+        
+        <a href="https://www.instagram.com/loadgamesoficial/" class="btn" target="_blank">
+          <i class="fab fa-instagram"></i>
+          <span class="label">Instagram</span>
+          <span class="subtext">@loadgamesoficial</span>
+        </a>
+        
+        <div class="btn save-contact" onclick="showContactCard()">
+          <i class="fas fa-address-book"></i>
+          <span class="label">Salvar Contato</span>
+          <span class="subtext">Todos os links em um contato</span>
+        </div>
+      </div>
+      
+      <div class="wifi-container">
+        <div class="section-title">
+          <i class="fas fa-wifi"></i>
+          <span>Wi-Fi do Estabelecimento</span>
+        </div>
+        <div class="wifi-info">
+          <div class="wifi-details">
+            <div class="wifi-name">Loadgames2g</div>
+            <div class="wifi-password">••••••••</div>
+          </div>
+          <button class="copy-btn" onclick="showPassword()">Mostrar Senha</button>
+        </div>
+      </div>
+      
+      <div class="google-rating">
+        <div class="rating-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="rating-value">4.7</div>
+        <div class="rating-text">Avaliação no Google</div>
+        <button class="review-btn" onclick="window.open('https://g.page/r/CUuStQaFwk4qEAE/review')">Avaliar</button>
+      </div>
+      
+      <div class="product-showcase">
+        <div class="product-title">Produtos em Destaque</div>
+        <div class="product-grid">
+          <div class="product-item">
+            <div class="product-image">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <div class="product-name">Controle PS5</div>
+          </div>
+          <div class="product-item">
+            <div class="product-image">
+              <i class="fas fa-headphones"></i>
+            </div>
+            <div class="product-name">Headset Gamer</div>
+          </div>
+          <div class="product-item">
+            <div class="product-image">
+              <i class="fas fa-compact-disc"></i>
+            </div>
+            <div class="product-name">Jogos PS4/PS5</div>
+          </div>
+          <div class="product-item">
+            <div class="product-image">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="product-name">Acessórios Nintendo</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="address-container">
+        <div class="section-title">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Nossas Lojas</span>
+        </div>
+        
+        <a href="https://maps.app.goo.gl/58iZjW42ngzubFZ89" target="_blank" class="address-link">
+          <div class="address-item">
+            <div class="address-icon">
+              <i class="fas fa-store"></i>
+            </div>
+            <div class="address-details">
+              <div class="address-title">Campo Limpo</div>
+              <div class="address-text">R. Mário Neme, 48<br>Campo Limpo - SP</div>
+              <div class="address-note">Travessa da estrada do campo limpo, próximo ao Banco do Brasil</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://maps.app.goo.gl/rKraQqmhJPQ7WSLB6" target="_blank" class="address-link">
+          <div class="address-item">
+            <div class="address-icon">
+              <i class="fas fa-store"></i>
+            </div>
+            <div class="address-details">
+              <div class="address-title">Taboão da Serra</div>
+              <div class="address-text">Av. Paulo Ayres, 470 - Loja 09<br>Pq. Pinheiros - Taboão da Serra</div>
+              <div class="address-note">Dentro do Mercado Rod e Raf</div>
+            </div>
+          </div>
+        </a>
+        
+        <a href="https://maps.app.goo.gl/JLAQ78G3ZzGsbDnv9" target="_blank" class="address-link">
+          <div class="address-item">
+            <div class="address-icon">
+              <i class="fas fa-store"></i>
+            </div>
+            <div class="address-details">
+              <div class="address-title">Jardim Esmeralda</div>
+              <div class="address-text">Av. Eng. Heitor Antônio Eiras Garcia, 6363 - Loja 10<br>Jardim Esmeralda - SP</div>
+              <div class="address-note">Dentro do Mercado Rod e Raf</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>© 2010 Load Games - Todos os direitos reservados</p>
+      <p>CNPJ: 14.451.482/0001-00</p>
+    </div>
+  </div>
+  
+  <div class="notification" id="notification">Texto copiado para a área de transferência!</div>
+  
+  <div class="contact-card" id="contactCard">
+    <div class="card-content">
+      <button class="close-card" onclick="hideContactCard()">&times;</button>
+      <h3>Salvar Contato</h3>
+      <p><i class="fas fa-store"></i> Load Games</p>
+      <p><i class="fas fa-phone"></i> (11) 2862-0607</p>
+      <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/551128620607" style="color: #aaa; text-decoration: none;">WhatsApp</a></p>
+      <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/loadgamesoficial/" style="color: #aaa; text-decoration: none;">@loadgamesoficial</a></p>
+      <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/loadgamesoficial" style="color: #aaa; text-decoration: none;">/loadgamesoficial</a></p>
+      <p><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@loadgamesoficial" style="color: #aaa; text-decoration: none;">@loadgamesoficial</a></p>
+      <p><i class="fas fa-map-marker-alt"></i> <a href="https://linktr.ee/loadgamesoficial" style="color: #aaa; text-decoration: none;">Ver todas as lojas</a></p>
+      
+      <div class="card-buttons">
+        <button class="card-btn primary" onclick="saveContact()">Salvar Contato</button>
+        <button class="card-btn secondary" onclick="hideContactCard()">Fechar</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showPassword() {
+      const passwordElement = document.querySelector('.wifi-password');
+      const button = document.querySelector('.copy-btn');
+      
+      if (passwordElement.textContent === '••••••••') {
+        passwordElement.textContent = '2202122014';
+        button.textContent = 'Copiar Senha';
+      } else {
+        copyToClipboard('2202122014', 'Senha copiada!');
+      }
+    }
+    
+    function copyToClipboard(text, message) {
+      navigator.clipboard.writeText(text).then(() => {
+        showNotification(message);
+      });
+    }
+    
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+    
+    function showContactCard() {
+      document.getElementById('contactCard').classList.add('show');
+    }
+    
+    function hideContactCard() {
+      document.getElementById('contactCard').classList.remove('show');
+    }
+    
+    function saveContact() {
+      showNotification('Contato salvo com sucesso!');
+      setTimeout(hideContactCard, 1500);
+    }
+    
+    document.querySelectorAll('.address-item').forEach(item => {
+      item.addEventListener('click', function() {
+        this.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 200);
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', function() {
+      const notification = document.getElementById('notification');
+      notification.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
