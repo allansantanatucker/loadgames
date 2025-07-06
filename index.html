@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Games - Sua Loja de Games Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== VARIÁVEIS E RESET ===== */
+        :root {
+            --primary: #ff6b00;
+            --secondary: #ff9900;
+            --dark: #1a1a1a;
+            --darker: #121212;
+            --light: #f8f8f8;
+            --gray: #444;
+            --instagram-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --transition: all 0.3s ease;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --border-radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== PADRÃO DE FUNDO ===== */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 107, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 153, 0, 0.05) 0%, transparent 20%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* ===== LAYOUT GERAL ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+
+        /* ===== PADRONIZAÇÃO DAS LATERAIS ===== */
+        .contact-section,
+        .instagram-section,
+        .posts-section,
+        .reviews-section,
+        .address-section {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 30px 20px;
+        }
+
+        .carousel-section {
+            padding: 40px 0;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .carousel-container {
+            margin: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--light);
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #e65a00;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(230, 90, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @keyframes waveAnimation {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* ===== HEADER ===== */
+        header {
+            background: rgba(26, 26, 26, 0.7);
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 65px;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));
+            transition: var(--transition);
+        }
+        
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* ===== CARROSSEL ESTILO STEAM ===== */
+        .steam-carousel {
+            display: flex;
+            height: 450px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            gap: 15px;
+        }
+        
+        .main-slide {
+            flex: 3;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 75%;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            min-height: 400px; /* Altura mínima para garantir que apareça */
+        }
+        
+        .thumbnails {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.9);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 10px 0;
+            width: 25%;
+            border-radius: var(--border-radius);
+        }
+        
+        .thumb-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 0;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thumb-item.active {
+            background: rgba(255, 107, 0, 0.1);
+            border-left-color: var(--primary);
+        }
+        
+        .thumb-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Efeito de onda para o botão inteiro */
+        .thumb-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+            z-index: 0;
+        }
+        
+        .thumb-item.active::before {
+            animation: waveAnimation 1.5s infinite;
+        }
+        
+        .thumb-img {
+            width: 60px;
+            height: 40px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .thumb-title {
+            font-size: 0.9rem;
+            color: var(--light);
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .discount-tag {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 1rem;
+        }
+        
+        .new-price {
+            font-weight: 700;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        /* MODIFICAÇÕES SOLICITADAS PARA O CARROSSEL */
+        .main-slide .carousel-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            z-index: 2;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* ===== CONTACT BUTTONS ===== */
+        .contact-section {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .btn-contact {
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            min-height: 150px;
+            cursor: pointer;
+        }
+
+        /* Animação de carregamento com ondas */
+        .btn-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-contact:hover::before {
+            left: 100%;
+        }
+        
+        .btn-contact:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 107, 0, 0.1);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-contact i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-contact .label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-contact .subtext {
+            font-size: 0.9rem;
+            color: #aaa;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Ícones coloridos */
+        .btn-contact i.fa-whatsapp { color: #25D366; }
+        .btn-contact i.fa-phone { color: #2AABEE; }
+        .btn-contact i.fa-qrcode { color: #8A05BE; }
+        .btn-contact i.fa-tiktok { 
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .btn-contact i.fa-instagram { color: #E1306C; }
+        .btn-contact i.fa-facebook { color: #1877F2; }
+        .btn-contact i.fa-address-book { color: var(--primary); }
+        
+        .btn-contact:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Botão especial para salvar contato */
+        .btn-contact.save-contact {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 153, 0, 0.2));
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            grid-column: span 3;
+        }
+
+        .btn-contact.save-contact:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.3), rgba(255, 153, 0, 0.3));
+        }
+        
+        /* ===== INSTAGRAM SECTION ===== */
+        .instagram-section {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(40, 40, 40, 0.8));
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .instagram-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            background: var(--instagram-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .reel-item {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            height: 320px;
+            cursor: pointer;
+        }
+        
+        .reel-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .reel-thumbnail {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .reel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .reel-overlay::before {
+            content: "\f144";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 40px;
+            color: white;
+            z-index: 3;
+        }
+        
+        .reel-item:hover .reel-overlay {
+            opacity: 1;
+        }
+        
+        .reel-content {
+            padding: 20px;
+        }
+        
+        .reel-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        .reel-stats {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .reel-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Seção de Postagens */
+        .posts-section {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(40, 40, 40, 0.8));
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .posts-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .post-item {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            height: 320px;
+            cursor: pointer;
+        }
+        
+        .post-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .post-thumbnail {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .post-overlay i {
+            color: white;
+            font-size: 2.5rem;
+        }
+        
+        .post-item:hover .post-overlay {
+            opacity: 1;
+        }
+        
+        .post-content {
+            padding: 20px;
+        }
+        
+        .post-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        .post-stats {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* ===== REVIEWS SECTION ===== */
+        .reviews-section {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin: 40px 0;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .review-card {
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .review-card:before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 5rem;
+            color: rgba(255, 107, 0, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .stars {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .review-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #ddd;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: var(--secondary);
+            text-align: right;
+        }
+        
+        .review-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .review-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+             /* ===== ESTILO DO GOOGLE AVALIAÇÕES ===== */
+        .google-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            padding: 15px 30px;
+            border-radius: 50px;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .google-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .google-g {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #4285F4;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 5px;
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== INDICADORES DE PONTOS PARA MOBILE ===== */
+        .carousel-indicators {
+            display: none;
+            justify-content: center;
+            padding: 15px 0;
+            gap: 10px;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .indicator.active {
+            background: var(--primary);
+        }
+
+        @media (max-width: 992px) {
+            .carousel-indicators {
+                display: flex;
+            }
+            
+            .thumbnails {
+                display: none;
+            }
+        }
+        
+        /* ===== ADDRESS SECTION ===== */
+        .address-section {
+            margin: 40px 0;
+        }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .location-card {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .location-map {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .map-overlay i {
+            color: white;
+            font-size: 2.5rem;
+            background: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .location-card:hover .map-overlay {
+            opacity: 1;
+        }
+        
+        .location-info {
+            padding: 25px;
+        }
+        
+        .location-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+        
+        .location-title i {
+            color: var(--primary);
+        }
+        
+        .location-text {
+            font-size: 1rem;
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .location-note {
+            font-size: 0.9rem;
+            color: #ff9900;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* ===== CARTÃO DE CONTATO (MODAL) ===== */
+        .contact-card {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact-card.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .card-content {
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card.show .card-content {
+            transform: scale(1);
+        }
+        
+        .card-content h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .card-content p {
+            margin: 10px 0;
+            color: #aaa;
+            text-align: left;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .card-content p i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--secondary);
+            width: 24px;
+            text-align: center;
+        }
+        
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+        
+        .card-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .card-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .card-btn.secondary {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-card {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-card:hover {
+            color: var(--secondary);
+        }
+
+        /* ===== NOTIFICAÇÕES ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(40, 40, 40, 0.9);
+            color: var(--secondary);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            transition: transform 0.5s ease, opacity 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: rgba(18, 18, 18, 0.95);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-about {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .footer-logo img {
+            height: 100px; /* Aumentado conforme solicitado */
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h4 {
+            color: var(--light);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #777;
+            font-size: 0.9rem;
+        }
+		
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            
+            .steam-carousel {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .main-slide {
+                width: 100%;
+                height: 400px; /* Altura fixa para mobile */
+                background-size: cover;
+            }
+            
+            .thumbnails {
+                width: 100%;
+                height: 150px;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+            }
+            
+            .thumb-item {
+                flex-direction: column;
+                width: 120px;
+                text-align: center;
+                border-left: none;
+                border-top: 4px solid transparent;
+            }
+            
+            .thumb-item.active {
+                border-left: none;
+                border-top: 4px solid var(--primary);
+            }
+            
+            .thumb-img {
+                width: 100px;
+                height: 60px;
+            }
+            
+            .carousel-indicators {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 26, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+            }
+            
+            nav ul.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .buttons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .reels-grid, .posts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 2.3rem; }
+            h2 { font-size: 2rem; }
+            
+            .hero {
+                padding-top: 90px;
+                padding-bottom: 60px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .buttons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .reels-grid, .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                transform: translateY(-100%);
+                opacity: 0;
+                height: 0;
+                overflow: hidden;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                height: auto;
+                padding: 30px 0;
+            }
+            
+            .logo img {
+                height: 95px;
+            }
+
+            .btn-contact.save-contact {
+                grid-column: span 2;
+            }
+            
+            .main-slide .carousel-content {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="assets/images/logo2.png" alt="Load Games Logo">
+            </a>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#instagram-reels">Reels</a></li>
+                    <li><a href="#instagram-posts">Postagens</a></li>
+                    <li><a href="#reviews">Avaliações</a></li>
+                    <li><a href="#locations">Lojas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>CONSOLES, ACESSÓRIOS E GAMES</h1>
+                <p>Há mais de uma década oferecendo os melhores produtos com preços imbatíveis e atendimento de excelência.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn">Contato Rápido</a>
+                    <a href="#locations" class="btn btn-outline">Nossas Lojas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section - Estilo Steam/Epic -->
+    <section class="carousel-section">
+        <div class="container">
+            <div class="steam-carousel" id="steamCarousel">
+                <!-- Área Principal do Slide -->
+                <div class="main-slide" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1175&q=80');">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-content">
+                        <h3 id="slideTitle">Promoção de Verão</h3>
+                        <p id="slideDescription">Aproveite os melhores preços em jogos e acessórios nesta temporada de verão!</p>
+                        <div class="price-row">
+                            <span class="discount-tag" id="slideDiscount">-30%</span>
+                            <span class="old-price" id="slideOldPrice">R$ 150,00</span>
+                            <span class="new-price" id="slideNewPrice">R$ 105,00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista Lateral de Miniaturas -->
+                <div class="thumbnails" id="thumbnailsList">
+                    <!-- Miniaturas serão geradas pelo JavaScript -->
+                </div>
+            </div>
+            <!-- Container para os indicadores de pontos -->
+            <div class="carousel-indicators" id="indicatorsContainer"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <p>Temos várias formas de atendimento para melhor servir você.</p>
+            
+            <div class="buttons-grid">
+                <a href="https://wa.me/551128620607" class="btn-contact" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="label">WhatsApp</div>
+                    <div class="subtext">(11) 2862-0607</div>
+                </a>
+                
+                <a href="tel:+551128620607" class="btn-contact">
+                    <i class="fas fa-phone"></i>
+                    <div class="label">Telefone</div>
+                    <div class="subtext">Ligar agora</div>
+                </a>
+                
+                <a href="#" class="btn-contact" onclick="copyToClipboard('14.451.482/0001-00', 'Chave PIX copiada!')">
+                    <i class="fas fa-qrcode"></i>
+                    <div class="label">PIX</div>
+                    <div class="subtext">CNPJ: 14.451.482/0001-00</div>
+                </a>
+                
+                <a href="https://www.tiktok.com/@loadgamesoficial" class="btn-contact" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                    <div class="label">TikTok</div>
+                    <div class="subtext">@loadgamesoficial</div>
+                </a>
+                
+                <a href="https://www.instagram.com/loadgamesoficial/" class="btn-contact" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <div class="label">Instagram</div>
+                    <div class="subtext">@loadgamesoficial</div>
+                </a>
+                
+                <a href="https://www.facebook.com/loadgamesoficial" class="btn-contact" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                    <div class="label">Facebook</div>
+                    <div class="subtext">/loadgamesoficial</div>
+                </a>
+                
+                <div class="btn-contact save-contact" onclick="showContactCard()">
+                    <i class="fas fa-address-book"></i>
+                    <div class="label">Salvar Contato</div>
+                    <div class="subtext">Todos os links em um contato</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Reels Section -->
+    <section id="instagram-reels" class="instagram-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="instagram-title">
+                    <i class="fab fa-instagram"></i>
+                    Reels do Instagram
+                </div>
+            </div>
+            
+            <div class="reels-grid" id="reels-container">
+                <!-- Reels serão carregados pelo JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Posts Section -->
+    <section id="instagram-posts" class="posts-section">
+        <div class="container">
+            <div class="posts-title">
+                <i class="far fa-image"></i>
+                Postagens em Destaque
+            </div>
+            
+            <div class="posts-grid" id="posts-container">
+                <!-- Postagens serão carregadas pelo JavaScript -->
+            </div>
+        </div>
+    </section>
+
+<!-- Reviews Section -->
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <h2>Avaliações de Clientes</h2>
+            <p>Veja o que nossos clientes dizem sobre nossos produtos e serviços.</p>
+            
+            <div class="reviews-container">
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <!-- <i class="fas fa-star"></i> -->
+                    </div>
+                    <p class="review-text">"Para o que precisei atendeu muito bem, um concerto no Xbox e controle do aparelho, coisa que outros lugares pediram uns dias pra dar o diagnóstico, neste local ja sai sabendo mais ou menos o valor que pagaria. Ótimo atendimento"</p>
+                    <p class="review-author">- Fernando Xavier</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="review-text">"Sempre encontro os melhores preços na Load Games. Já comprei vários jogos e acessórios. Recomendo muito!"</p>
+                    <p class="review-author">- Jheniffer Narlla</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Uns queridos, resolvem os problemas mesmo e tem um ótimo atendimento. Só conserto meu celular com eles."</p>
+                    <p class="review-author">- Julia Costa Araújo</p>
+                </div>
+            </div>
+            
+            <div class="review-cta">
+                <p>Sua avaliação é muito importante para nós!</p>
+                <a href="https://g.page/r/CUuStQaFwk4qEAE/review" class="google-link" target="_blank">
+                    <span class="google-g">G</span>Google Avaliações
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Address Section -->
+    <section id="locations" class="address-section">
+        <div class="container">
+            <h2>Nossas Lojas</h2>
+            <p>Venha nos visitar e conhecer nossa variedade de produtos.</p>
+            
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-map" style="background-image: url('assets/images/maps/campolimpo.jpg')">
+                        <div class="map-overlay">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </div>
+                    <div class="location-info">
+                        <div class="location-title">
+                            <i class="fas fa-store"></i> Campo Limpo
+                        </div>
+                        <div class="location-text">R. Mário Neme, 48<br>Campo Limpo - SP</div>
+                        <div class="location-note">Travessa da estrada do campo limpo, próximo ao Banco do Brasil</div>
+                        <a href="https://maps.app.goo.gl/58iZjW42ngzubFZ89" class="btn" target="_blank">Ver no Mapa</a>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-map" style="background-image: url('assets/images/maps/pqpinheiros.jpg')">
+                        <div class="map-overlay">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </div>
+                    <div class="location-info">
+                        <div class="location-title">
+                            <i class="fas fa-store"></i> Taboão da Serra
+                        </div>
+                        <div class="location-text">Av. Paulo Ayres, 470 - Loja 09<br>Pq. Pinheiros - Taboão da Serra</div>
+                        <div class="location-note">Dentro do Mercado Rod e Raf</div>
+                        <a href="https://maps.app.goo.gl/rKraQqmhJPQ7WSLB6" class="btn" target="_blank">Ver no Mapa</a>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-map" style="background-image: url('assets/images/maps/joao23.jpg')">
+                        <div class="map-overlay">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </div>
+                    <div class="location-info">
+                        <div class="location-title">
+                            <i class="fas fa-store"></i> Jardim Esmeralda
+                        </div>
+                        <div class="location-text">Av. Eng. Heitor Antônio Eiras Garcia, 6363 - Loja 10<br>Jardim Esmeralda - SP</div>
+                        <div class="location-note">Dentro do Mercado Rod e Raf</div>
+                        <a href="https://maps.app.goo.gl/JLAQ78G3ZzGsbDnv9" class="btn" target="_blank">Ver no Mapa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo2.png" alt="Load Games">
+                    </div>
+                    <p>Há mais de 10 anos oferecendo os melhores consoles, acessórios e games com preços imbatíveis.</p>
+                    
+                    <div class="footer-social">
+                        <a href="https://wa.me/551128620607" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/loadgamesoficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/loadgamesoficial" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@loadgamesoficial" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#hero">Início</a></li>
+                        <li><a href="#instagram-reels">Reels</a></li>
+                        <li><a href="#instagram-posts">Postagens</a></li>
+                        <li><a href="#reviews">Avaliações</a></li>
+                        <li><a href="#locations">Lojas</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Informações</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Trocas e Devoluções</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2010 - 2023 Load Games - Todos os direitos reservados</p>
+                <p>CNPJ: 14.451.482/0001-00</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal do Cartão de Contato -->
+    <div class="contact-card" id="contactCard">
+        <div class="card-content">
+            <button class="close-card" onclick="hideContactCard()">&times;</button>
+            <h3>Salvar Contato</h3>
+            <p><i class="fas fa-store"></i> Load Games</p>
+            <p><i class="fas fa-phone"></i> (11) 2862-0607</p>
+            <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/551128620607" style="color: #aaa; text-decoration: none;">WhatsApp</a></p>
+            <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/loadgamesoficial/" style="color: #aaa; text-decoration: none;">@loadgamesoficial</a></p>
+            <p><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/loadgamesoficial" style="color: #aaa; text-decoration: none;">/loadgamesoficial</a></p>
+            <p><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@loadgamesoficial" style="color: #aaa; text-decoration: none;">@loadgamesoficial</a></p>
+            <p><i class="fas fa-map-marker-alt"></i> <a href="https://linktr.ee/loadgamesoficial" style="color: #aaa; text-decoration: none;">Ver todas as lojas</a></p>
+            
+            <div class="card-buttons">
+                <button class="card-btn primary" onclick="saveContact()">Salvar Contato</button>
+                <button class="card-btn secondary" onclick="hideContactCard()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificação -->
+    <div class="notification" id="notification">Texto copiado para a área de transferência!</div>
+
+    <script>
+        // Dados dos reels e posts
+        const reelsData = [
+            {
+                title: "Novos Controles PS5",
+                imageUrl: "assets/images/reels/reel1.jpg",
+                postUrl: "https://www.instagram.com/reel/Cg1eP6DLXJc/",
+                likes: "1.2K",
+                comments: "85"
+            },
+            {
+                title: "Promoção de Jogos",
+                imageUrl: "assets/images/reels/reel2.jpg",
+                postUrl: "https://www.instagram.com/reel/Cg0Kz4KjK5N/",
+                likes: "2.4K",
+                comments: "142"
+            },
+            {
+                title: "Acessórios Nintendo",
+                imageUrl: "assets/images/reels/reel3.jpg",
+                postUrl: "https://www.instagram.com/reel/CfzXkY2jJ7H/",
+                likes: "3.1K",
+                comments: "210"
+            },
+            {
+                title: "Tour pela Loja",
+                imageUrl: "assets/images/reels/reel4.jpg",
+                postUrl: "https://www.instagram.com/reel/CfzXkY2jJ7H/",
+                likes: "4.7K",
+                comments: "324"
+            }
+        ];
+        
+        const postsData = [
+            {
+                title: "Controle PS5 - Novo Estoque",
+                imageUrl: "assets/images/posts/post1.jpg",
+                postUrl: "https://www.instagram.com/p/Cg1eP6DLXJc/",
+                likes: "1.5K",
+                comments: "78"
+            },
+            {
+                title: "Promoção de Jogos PS4",
+                imageUrl: "assets/images/posts/post2.jpg",
+                postUrl: "https://www.instagram.com/p/Cg0Kz4KjK5N/",
+                likes: "2.1K",
+                comments: "95"
+            },
+            {
+                title: "Acessórios Nintendo",
+                imageUrl: "assets/images/posts/post3.jpg",
+                postUrl: "https://www.instagram.com/p/Cg0Kz4KjK5N/",
+                likes: "1.8K",
+                comments: "63"
+            },
+            {
+                title: "Nossas Lojas",
+                imageUrl: "assets/images/posts/post4.jpg",
+                postUrl: "https://www.instagram.com/p/Cg0Kz4KjK5N/",
+                likes: "3.2K",
+                comments: "121"
+            }
+        ];
+        
+        // Dados do carrossel estilo Steam/Epic
+        const carouselData = [
+            {
+                title: "Promoção de Verão",
+                image: "assets/images/carrossel/slide1.jpg",
+                thumbnail: "assets/images/carrossel/slide1.jpg",
+                description: "Aproveite os melhores preços em jogos e acessórios nesta temporada de verão!",
+                discount: "-30%",
+                oldPrice: "R$ 150,00",
+                newPrice: "R$ 105,00"
+            },
+            {
+                title: "Novo Estoque PS5",
+                image: "assets/images/carrossel/slide2.jpg",
+                thumbnail: "assets/images/carrossel/slide2.jpg",
+                description: "Consoles PlayStation 5 disponíveis com frete grátis para todo Brasil!",
+                discount: "-20%",
+                oldPrice: "R$ 229,99",
+                newPrice: "R$ 183,99"
+            },
+            {
+                title: "Coleção Nintendo",
+                image: "assets/images/carrossel/slide3.jpg",
+                thumbnail: "assets/images/carrossel/slide3.jpg",
+                description: "Os melhores jogos e acessórios para seu Nintendo Switch com descontos especiais.",
+                discount: "-25%",
+                oldPrice: "R$ 120,00",
+                newPrice: "R$ 90,00"
+            },
+            {
+                title: "Acessórios Premium",
+                image: "assets/images/carrossel/slide4.jpg",
+                thumbnail: "assets/images/carrossel/slide4.jpg",
+                description: "Headsets, controles e periféricos de alta qualidade com garantia de 1 ano.",
+                discount: "-15%",
+                oldPrice: "R$ 299,99",
+                newPrice: "R$ 254,99"
+            },
+            {
+                title: "Jogos em Destaque",
+                image: "assets/images/carrossel/slide5.jpg",
+                thumbnail: "assets/images/carrossel/slide5.jpg",
+                description: "Os lançamentos mais esperados com preços especiais para assinantes.",
+                discount: "-10%",
+                oldPrice: "R$ 80,00",
+                newPrice: "R$ 72,00"
+            },
+            {
+                title: "Ofertas Exclusivas",
+                image: "assets/images/carrossel/slide6.jpg",
+                thumbnail: "assets/images/carrossel/slide6.jpg",
+                description: "Descontos imperdíveis em jogos selecionados. Aproveite!",
+                discount: "-40%",
+                oldPrice: "R$ 200,00",
+                newPrice: "R$ 120,00"
+            }
+        ];
+        
+        // Funções para interatividade
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification(message);
+            });
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Funções do modal de contato
+        function showContactCard() {
+            document.getElementById('contactCard').classList.add('show');
+        }
+        
+        function hideContactCard() {
+            document.getElementById('contactCard').classList.remove('show');
+        }
+        
+        function saveContact() {
+            showNotification('Contato salvo com sucesso!');
+            setTimeout(hideContactCard, 1500);
+        }
+        
+        // Renderizar reels e posts
+        function renderReels() {
+            const container = document.getElementById('reels-container');
+            container.innerHTML = '';
+            
+            reelsData.forEach(reel => {
+                const reelElement = document.createElement('div');
+                reelElement.className = 'reel-item';
+                reelElement.innerHTML = `
+                    <div class="reel-thumbnail" style="background-image: url('${reel.imageUrl}')">
+                        <div class="reel-overlay"></div>
+                    </div>
+                    <div class="reel-content">
+                        <div class="reel-title">${reel.title}</div>
+                        <div class="reel-stats">
+                            <div class="reel-stat">
+                                <i class="fas fa-heart"></i> ${reel.likes}
+                            </div>
+                            <div class="reel-stat">
+                                <i class="fas fa-comment"></i> ${reel.comments}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                reelElement.addEventListener('click', () => {
+                    window.open(reel.postUrl, '_blank');
+                });
+                
+                container.appendChild(reelElement);
+            });
+        }
+        
+        function renderPosts() {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            
+            postsData.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post-item';
+                postElement.innerHTML = `
+                    <div class="post-thumbnail" style="background-image: url('${post.imageUrl}')">
+                        <div class="post-overlay">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-title">${post.title}</div>
+                        <div class="post-stats">
+                            <div class="post-stat">
+                                <i class="fas fa-heart"></i> ${post.likes}
+                            </div>
+                            <div class="post-stat">
+                                <i class="fas fa-comment"></i> ${post.comments}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                postElement.addEventListener('click', () => {
+                    window.open(post.postUrl, '_blank');
+                });
+                
+                container.appendChild(postElement);
+            });
+        }
+        
+        // Renderizar miniaturas do carrossel estilo Steam com efeito de onda
+        function renderSteamThumbnails() {
+            const container = document.getElementById('thumbnailsList');
+            container.innerHTML = '';
+            
+            carouselData.forEach((item, index) => {
+                const thumbElement = document.createElement('div');
+                thumbElement.className = 'thumb-item';
+                if(index === 0) thumbElement.classList.add('active');
+                
+                thumbElement.innerHTML = `
+                    <div class="thumb-img" style="background-image: url('${item.thumbnail}')"></div>
+                    <div class="thumb-title">${item.title}</div>
+                `;
+                
+                thumbElement.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                
+                container.appendChild(thumbElement);
+            });
+        }
+        
+        // Variáveis globais
+        let autoSlideInterval;
+        let currentSlideIndex = 0;
+
+        // Função para ir para um slide específico
+        function goToSlide(index) {
+            const slide = carouselData[index];
+            const mainSlide = document.querySelector('.main-slide');
+            const slideTitle = document.getElementById('slideTitle');
+            const slideDescription = document.getElementById('slideDescription');
+            const slideDiscount = document.getElementById('slideDiscount');
+            const slideOldPrice = document.getElementById('slideOldPrice');
+            const slideNewPrice = document.getElementById('slideNewPrice');
+            
+            // Atualizar o slide principal
+            mainSlide.style.backgroundImage = `url('${slide.image}')`;
+            slideTitle.textContent = slide.title;
+            slideDescription.textContent = slide.description;
+            slideDiscount.textContent = slide.discount;
+            slideOldPrice.textContent = slide.oldPrice;
+            slideNewPrice.textContent = slide.newPrice;
+            
+            // Tornar todo o slide um link para o WhatsApp
+            mainSlide.onclick = function() {
+                window.open(`https://wa.me/551128620607?text=${encodeURIComponent('Olá, gostaria de saber mais sobre: ' + slide.title)}`, '_blank');
+            };
+            
+            // Atualizar as miniaturas ativas
+            document.querySelectorAll('.thumb-item').forEach((thumb, idx) => {
+                thumb.classList.toggle('active', idx === index);
+            });
+            
+            // Atualizar os indicadores ativos
+            document.querySelectorAll('.indicator').forEach((indicator, idx) => {
+                indicator.classList.toggle('active', idx === index);
+            });
+            
+            // Atualizar o índice atual
+            currentSlideIndex = index;
+            
+            // Reiniciar o temporizador automático
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+        
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                currentSlideIndex = (currentSlideIndex + 1) % carouselData.length;
+                goToSlide(currentSlideIndex);
+            }, 5000);
+        }
+        
+        // Menu mobile
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Fechar menu mobile após clicar em um link
+                    document.querySelector('nav ul').classList.remove('active');
+                }
+            });
+        });
+        
+        // Funções para os indicadores de pontos
+        function renderIndicators() {
+            const container = document.getElementById('indicatorsContainer');
+            container.innerHTML = '';
+            
+            carouselData.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                if(index === 0) indicator.classList.add('active');
+                
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                
+                container.appendChild(indicator);
+            });
+        }
+
+        // Variáveis para controle do touch
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        // Funções para navegação por touch
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchMove(e) {
+            touchEndX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchEnd() {
+            const diff = touchStartX - touchEndX;
+            const absDiff = Math.abs(diff);
+            
+            // Se o movimento for maior que 50px, consideramos swipe
+            if (absDiff > 50) {
+                if (diff > 0) {
+                    // Swipe left: próxima
+                    let nextIndex = (currentSlideIndex + 1) % carouselData.length;
+                    goToSlide(nextIndex);
+                } else {
+                    // Swipe right: anterior
+                    let prevIndex = (currentSlideIndex - 1 + carouselData.length) % carouselData.length;
+                    goToSlide(prevIndex);
+                }
+            }
+        }
+        
+        // Inicializar quando a página carregar
+        window.addEventListener('load', function() {
+            renderReels();
+            renderPosts();
+            renderSteamThumbnails();
+            renderIndicators();
+            goToSlide(0);
+            startAutoSlide();
+            
+            // Adicionar eventos de touch ao slide principal
+            const mainSlide = document.querySelector('.main-slide');
+            if (mainSlide) {
+                mainSlide.addEventListener('touchstart', handleTouchStart, false);
+                mainSlide.addEventListener('touchmove', handleTouchMove, false);
+                mainSlide.addEventListener('touchend', handleTouchEnd, false);
+            }
+        });
+    </script>
+</body>
+</html>
