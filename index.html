@@ -249,40 +249,118 @@
             font-size: 1.5rem;
             color: white;
             cursor: pointer;
-			position: absolute;
-			right: 40px; /* Distância da direita */
-			top: 25px;   /* Distância do topo */
+            position: absolute;
+            right: 40px; /* Distância da direita */
+            top: 25px;   /* Distância do topo */
         }
         
-        /* ===== HERO SECTION ===== */
-        .hero {
-            padding-top: 100px;
-            padding-bottom: 80px;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), 
-                        url('assets/images/loja1.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            max-width: 700px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-        
-        .hero-buttons {
+        /* ===== HERO SECTION (ANTIGO HEADER DO INDEX1) ===== */
+		.hero {
+			padding-top: 100px;
+			padding-bottom: 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)), 
+                        url('assets/images/backgrounds/hero-home.jpg');
+			background-size: cover;
+			background-position: center center; /* Centraliza e focaliza o centro */
+			background-repeat: no-repeat;
+			position: relative;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-height: 80vh; /* Altura ajustável */
+		}
+
+        <!-- .hero::after { -->
+            <!-- content: ''; -->
+            <!-- position: absolute; -->
+            <!-- top: 0; -->
+            <!-- left: 0; -->
+            <!-- width: 100%; -->
+            <!-- height: 100%; -->
+            <!-- background: url('assets/images/loja1.jpg'); -->
+            <!-- background-size: cover; -->
+            <!-- background-position: center top; -->
+            <!-- background-attachment: local; -->
+            <!-- z-index: -1; -->
+            <!-- opacity: 0.8; -->
+        <!-- } -->
+
+        .logo-container {
+            width: 320px;
+            height: 160px;
+            margin: 0 auto 15px;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s infinite, float 4s ease-in-out infinite;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255, 153, 0, 0.5));
+        }
+
+		.subtitle {
+			font-size: 1.5rem;
+			color: #fff;
+			margin-bottom: 20px;
+			font-weight: 300;
+			text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			position: relative;
+			z-index: 1;
+			background: rgba(0, 0, 0, 0.4);
+			padding: 15px 30px;
+			border-radius: 30px;
+			backdrop-filter: blur(5px);
+			max-width: 90%;
+			text-align: center; /* Centralização horizontal */
+			display: flex;
+			justify-content: center; /* Centralização horizontal (flex) */
+			align-items: center; /* Centralização vertical (flex) */
+            margin: 0 auto 20px; /* Centraliza o bloco e adiciona margem inferior */
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
             gap: 20px;
-            margin-top: 30px;
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--secondary);
+            font-size: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon.instagram {
+            background: var(--instagram-gradient);
+            color: white;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
         }
         
         /* ===== CARROSSEL ESTILO STEAM ===== */
@@ -1220,7 +1298,7 @@
             color: #777;
             font-size: 0.9rem;
         }
-		
+        
         /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 992px) {
             h1 { font-size: 2.8rem; }
@@ -1267,6 +1345,22 @@
             .carousel-indicators {
                 display: flex;
             }
+
+            /* Ajustes para o novo hero */
+            .hero {
+                min-height: auto;
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+            
+            .logo-container {
+                width: 280px;
+                height: 140px;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1293,11 +1387,6 @@
                 clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
             .buttons-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1305,16 +1394,27 @@
             .reels-grid, .posts-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            /* Ajustes para o novo hero */
+            .hero {
+                padding-top: 100px;
+            }
+            
+            .logo-container {
+                width: 240px;
+                height: 120px;
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
         }
         
         @media (max-width: 480px) {
             h1 { font-size: 2.3rem; }
             h2 { font-size: 2rem; }
-            
-            .hero {
-                padding-top: 110px;
-                padding-bottom: 60px;
-            }
             
             section {
                 padding: 60px 0;
@@ -1356,17 +1456,39 @@
                 bottom: 15px;
                 padding: 15px;
             }
+
+            /* Ajustes para o novo hero */
+            .hero {
+                padding-top: 110px;
+                padding-bottom: 40px;
+            }
+            
+            .logo-container {
+                width: 200px;
+                height: 100px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                padding: 6px 15px;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
     
-    <!-- Header -->
+    <!-- Header (Navegação) -->
     <header>
         <div class="container header-container">
             <a href="#" class="logo">
-                <img src="assets/images/logo2.png" alt="Load Games Logo">
+                <img src="assets/images/logos/logo-main.png" alt="Load Games Logo">
             </a>
             
             <div class="mobile-menu">
@@ -1385,21 +1507,34 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Substituída pelo header do index1) -->
     <section id="hero" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>CONSOLES, ACESSÓRIOS E GAMES</h1>
-                <p>Há mais de uma década oferecendo os melhores produtos com preços imbatíveis e atendimento de excelência.</p>
-                
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn">Contato Rápido</a>
-                    <a href="#locations" class="btn btn-outline">Nossas Lojas</a>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="assets/images/logos/logo-main.png" alt="Load Games Logo">
                 </div>
+            </div>
+            <p class="subtitle">Consoles, acessórios e games com os melhores preços!</p>
+
+            <div class="social-links">
+                <a href="https://wa.me/551128620607" class="social-icon" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/loadgamesoficial/" class="social-icon instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/loadgamesoficial" class="social-icon" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.tiktok.com/@loadgamesoficial" class="social-icon" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- Restante do conteúdo permanece igual -->
     <!-- Carousel Section - Estilo Steam/Epic -->
     <section class="carousel-section">
         <div class="container">
@@ -1627,7 +1762,7 @@
             <div class="footer-container">
                 <div class="footer-about">
                     <div class="footer-logo">
-                        <img src="assets/images/logo2.png" alt="Load Games">
+                        <img src="assets/images/logos/logo-main.png" alt="Load Games">
                     </div>
                     <p>Há mais de 10 anos oferecendo os melhores consoles, acessórios e games com preços imbatíveis.</p>
                     
@@ -1693,6 +1828,23 @@
     <div class="notification" id="notification">Texto copiado para a área de transferência!</div>
 
     <script>
+	
+	// Ajuste dinâmico da imagem de fundo
+    function adjustHeroBackground() {
+        const hero = document.querySelector('.hero');
+        const windowRatio = window.innerWidth / window.innerHeight;
+        
+        // Escolhe o melhor enquadramento baseado na proporção da tela
+        if(windowRatio > 1.5) { // Telas largas (desktop)
+            hero.style.backgroundPosition = "center 30%";
+        } else { // Telas estreitas (mobile)
+            hero.style.backgroundPosition = "center center";
+        }
+    }
+	
+    // Executa no carregamento e no redimensionamento
+    window.addEventListener('load', adjustHeroBackground);
+    window.addEventListener('resize', adjustHeroBackground);
         // Dados dos reels e posts
         const reelsData = [
             {
