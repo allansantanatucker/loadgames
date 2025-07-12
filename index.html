@@ -56,6 +56,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+			box-sizing: border-box;
         }
         
         section {
@@ -250,18 +251,28 @@
             color: white;
             cursor: pointer;
             position: absolute;
-            right: 40px; /* Distância da direita */
-            top: 25px;   /* Distância do topo */
+            right: 30px; /* Distância da direita */
+            top: 30px;   /* Distância do topo */
+            background: rgba(255, 107, 0, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
+		
+        .mobile-menu:hover {
+            background: var(--primary);
+        }		
         
-        /* ===== HERO SECTION (ANTIGO HEADER DO INDEX1) ===== */
+        /* ===== HERO SECTION ===== */
 		.hero {
 			padding-top: 100px;
 			padding-bottom: 80px;
-            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)), 
-                        url('assets/images/backgrounds/hero-home.jpg');
+            background: url('assets/images/backgrounds/hero-home.jpg');
 			background-size: cover;
-			background-position: center center; /* Centraliza e focaliza o centro */
+			background-position: center 30%; /* Centraliza e focaliza o centro */
 			background-repeat: no-repeat;
 			position: relative;
 			overflow: hidden;
@@ -271,21 +282,6 @@
 			align-items: center;
 			min-height: 80vh; /* Altura ajustável */
 		}
-
-        <!-- .hero::after { -->
-            <!-- content: ''; -->
-            <!-- position: absolute; -->
-            <!-- top: 0; -->
-            <!-- left: 0; -->
-            <!-- width: 100%; -->
-            <!-- height: 100%; -->
-            <!-- background: url('assets/images/loja1.jpg'); -->
-            <!-- background-size: cover; -->
-            <!-- background-position: center top; -->
-            <!-- background-attachment: local; -->
-            <!-- z-index: -1; -->
-            <!-- opacity: 0.8; -->
-        <!-- } -->
 
         .logo-container {
             width: 320px;
@@ -335,6 +331,7 @@
             margin: 30px 0;
             position: relative;
             z-index: 1;
+            flex-wrap: wrap;
         }
 
         .social-icon {
@@ -382,13 +379,30 @@
             display: flex;
             align-items: center;
             gap: 30px;
-            background-size: cover;
+            background-size: cover; /* Padrão: cobrir todo o espaço */
             background-position: center;
             background-repeat: no-repeat;
             width: 75%;
             border-radius: var(--border-radius);
             cursor: pointer;
             min-height: 400px; /* Altura mínima para garantir que apareça */
+            background-color: rgba(26, 26, 26, 0.9); /* Fundo para áreas não preenchidas */
+        }
+        
+        /* Desktop: mostrar imagem inteira */
+        @media (min-width: 993px) {
+            .main-slide {
+                background-size: contain; /* Mostra a imagem inteira */
+                background-position: center;
+            }
+        }
+        
+        /* Mobile: mostrar parte centralizada da imagem */
+        @media (max-width: 992px) {
+            .main-slide {
+                background-size: cover; /* Mostra parte da imagem (cortada) */
+                background-position: center; /* Centraliza o corte */
+            }
         }
         
         .thumbnails {
@@ -494,15 +508,16 @@
         /* MODIFICAÇÕES SOLICITADAS PARA O CARROSSEL */
         .main-slide .carousel-content {
             position: absolute;
-            bottom: 30px;
+            bottom: 10px;
             left: 30px;
             right: 30px;
             z-index: 2;
             background: rgba(26, 26, 26, 0.7);
-            padding: 20px;
+            padding: 10px;
             border-radius: var(--border-radius);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+			 display: none;
         }
         
         /* ===== CONTACT BUTTONS ===== */
@@ -523,7 +538,7 @@
         }
         
         .btn-contact {
-            background: rgba(40, 40, 40, 0.8);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 20px;
             display: flex;
@@ -658,7 +673,7 @@
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
-            height: 320px;
+            height: 600px;
             cursor: pointer;
         }
         
@@ -669,13 +684,15 @@
         
         .reel-thumbnail {
             width: 100%;
-            height: 200px;
+            height: 100%;
+            /* Alterado para mostrar imagem inteira em desktop */
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            <!-- background-color: rgba(26, 26, 26, 0.9); /* Fundo para áreas não preenchidas */ -->
         }
         
         .reel-overlay {
@@ -706,7 +723,13 @@
         }
         
         .reel-content {
-            padding: 20px;
+              position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(26, 26, 26, 0.7); /* fundo escuro com transparência */
+    backdrop-filter: blur(5px);
+    z-index: 2;
         }
         
         .reel-title {
@@ -762,7 +785,7 @@
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
-            height: 320px;
+            height: 550px;
             cursor: pointer;
         }
         
@@ -773,13 +796,17 @@
         
         .post-thumbnail {
             width: 100%;
-            height: 200px;
+            height: 100%;
+            /* Alterado para mostrar imagem inteira em desktop */
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            <!-- background-color: rgba(26, 26, 26, 0.9); /* Fundo para áreas não preenchidas */ -->
+			z-index: 1;
+			
         }
         
         .post-overlay {
@@ -806,7 +833,13 @@
         }
         
         .post-content {
-            padding: 20px;
+              position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(26, 26, 26, 0.7); /* fundo escuro com transparência */
+    backdrop-filter: blur(5px);
+    z-index: 2;
         }
         
         .post-title {
@@ -830,6 +863,15 @@
             gap: 5px;
         }
         
+        /* ===== ADAPTAÇÕES PARA MOBILE ===== */
+        @media (max-width: 992px) {
+            .reel-thumbnail, .post-thumbnail {
+     background-size: contain; /* Mostrar imagem inteira */
+    background-position: center center;
+    background-repeat: no-repeat;
+            }
+        }
+
         /* ===== REVIEWS SECTION ===== */
         .reviews-section {
             background: rgba(30, 30, 30, 0.7);
@@ -906,7 +948,7 @@
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
-            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 153, 0, 0.2));
             padding: 15px 30px;
             border-radius: 50px;
             gap: 10px;
@@ -1312,7 +1354,6 @@
             .main-slide {
                 width: 100%;
                 height: 400px; /* Altura fixa para mobile */
-                background-size: cover;
             }
             
             .thumbnails {
@@ -1365,9 +1406,12 @@
         
         @media (max-width: 768px) {
             .mobile-menu {
-                display: block;
+                display: flex;
+                top: 25px;
+                right: 20px;
             }
             
+			
             nav ul {
                 position: absolute;
                 top: 100%;
@@ -1394,6 +1438,9 @@
             .reels-grid, .posts-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+			    .post-item {
+        height: 340px; /* altura para celular */
+    }
 
             /* Ajustes para o novo hero */
             .hero {
@@ -1462,6 +1509,8 @@
                 padding-top: 110px;
                 padding-bottom: 40px;
             }
+			
+			
             
             .logo-container {
                 width: 200px;
@@ -1534,7 +1583,6 @@
         </div>
     </section>
 
-    <!-- Restante do conteúdo permanece igual -->
     <!-- Carousel Section - Estilo Steam/Epic -->
     <section class="carousel-section">
         <div class="container">
@@ -1670,7 +1718,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                        <i class="fas fa-star"></i>						
+                        <!-- <i class="fas fa-star-half-alt"></i> -->
                     </div>
                     <p class="review-text">"Sempre encontro os melhores preços na Load Games. Já comprei vários jogos e acessórios. Recomendo muito!"</p>
                     <p class="review-author">- Jheniffer Narlla</p>
@@ -1691,9 +1740,17 @@
             
             <div class="review-cta">
                 <p>Sua avaliação é muito importante para nós!</p>
-                <a href="https://g.page/r/CUuStQaFwk4qEAE/review" class="google-link" target="_blank">
-                    <span class="google-g">G</span>Google Avaliações
-                </a>
+<a href="https://g.page/r/CUuStQaFwk4qEAE/review" class="google-link" target="_blank"  style="font-size: 1.4rem;">
+    <span class="google-logo">
+        <span style="color: #4285F4">G</span>
+        <span style="color: #EA4335">o</span>
+        <span style="color: #FBBC05">o</span>
+        <span style="color: #4285F4">g</span>
+        <span style="color: #34A853">l</span>
+        <span style="color: #EA4335">e</span>
+    </span>
+    &nbsp;Avaliações
+</a>
             </div>
         </div>
     </section>
@@ -1785,16 +1842,16 @@
                     </ul>
                 </div>
                 
-                <div class="footer-links">
-                    <h4>Informações</h4>
-                    <ul>
-                        <li><a href="#">Sobre Nós</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Trocas e Devoluções</a></li>
-                        <li><a href="#">Perguntas Frequentes</a></li>
-                    </ul>
-                </div>
+                <!-- <div class="footer-links"> -->
+                    <!-- <h4>Informações</h4> -->
+                    <!-- <ul> -->
+                        <!-- <li><a href="#">Sobre Nós</a></li> -->
+                        <!-- <li><a href="#">Termos de Uso</a></li> -->
+                        <!-- <li><a href="#">Política de Privacidade</a></li> -->
+                        <!-- <li><a href="#">Trocas e Devoluções</a></li> -->
+                        <!-- <li><a href="#">Perguntas Frequentes</a></li> -->
+                    <!-- </ul> -->
+                <!-- </div> -->
             </div>
             
             <div class="copyright">
@@ -1828,24 +1885,24 @@
     <div class="notification" id="notification">Texto copiado para a área de transferência!</div>
 
     <script>
-	
-	// Ajuste dinâmico da imagem de fundo
-    function adjustHeroBackground() {
-        const hero = document.querySelector('.hero');
-        const windowRatio = window.innerWidth / window.innerHeight;
-        
-        // Escolhe o melhor enquadramento baseado na proporção da tela
-        if(windowRatio > 1.5) { // Telas largas (desktop)
-            hero.style.backgroundPosition = "center 30%";
-        } else { // Telas estreitas (mobile)
-            hero.style.backgroundPosition = "center center";
-        }
-    }
-	
-    // Executa no carregamento e no redimensionamento
-    window.addEventListener('load', adjustHeroBackground);
-    window.addEventListener('resize', adjustHeroBackground);
-        // Dados dos reels e posts
+			// Ajuste dinâmico da imagem de fundo
+		function adjustHeroBackground() {
+			const hero = document.querySelector('.hero');
+			const windowRatio = window.innerWidth / window.innerHeight;
+			
+			// Escolhe o melhor enquadramento baseado na proporção da tela
+			if(windowRatio > 1.5) { // Telas largas (desktop)
+				hero.style.backgroundPosition = "center 30%";
+			} else { // Telas estreitas (mobile)
+				hero.style.backgroundPosition = "center center";
+			}
+		}
+		
+		// Executa no carregamento e no redimensionamento
+		window.addEventListener('load', adjustHeroBackground);
+		window.addEventListener('resize', adjustHeroBackground);
+       
+	   // Dados dos reels e posts
         const reelsData = [
             {
                 title: "Novos Controles PS5",
@@ -2142,6 +2199,7 @@
         // Menu mobile
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('nav ul').classList.toggle('active');
+            this.classList.toggle('active');
         });
         
         // Smooth scrolling
@@ -2158,6 +2216,7 @@
                     
                     // Fechar menu mobile após clicar em um link
                     document.querySelector('nav ul').classList.remove('active');
+                    document.querySelector('.mobile-menu').classList.remove('active');
                 }
             });
         });
@@ -2213,6 +2272,7 @@
         
         // Inicializar quando a página carregar
         window.addEventListener('load', function() {
+            adjustHeroBackground();
             renderReels();
             renderPosts();
             renderSteamThumbnails();
