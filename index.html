@@ -278,36 +278,34 @@
 			justify-content: center;
 			min-height: 70vh;
 			overflow: hidden;
-			padding-top: 120px; /* para não colar no topo fixo */
+			padding-top: 80px; /* Reduzido de 120px */
 			padding-bottom: 60px;
-			}
-			
-			.hero-background {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  width: 100%;
-			  height: 100%;
-			  background-image: url('assets/images/backgrounds/hero-home.jpg');
-			  background-repeat: no-repeat;
-			  background-position: center;
-			  background-size: contain;
-			  z-index: 1;
-			}
+		}
+					
+		.hero-background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 90%; /* Aumenta a altura para mostrar mais da parte inferior */
+			background-image: url('assets/images/backgrounds/hero-home.jpg');
+			background-repeat: no-repeat;
+			background-position: center bottom; /* Foca na parte inferior */
+			background-size: cover; /* Garante que a imagem cubra toda a área */
+			z-index: 1;
+		}
 
-
-
-			.hero-content {
-			  position: relative;
-			  z-index: 1;
-			  text-align: center;
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  gap: 25px;
-			}
-
-		
+		.hero-content {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 25px;
+			transform: translateY(-5%); /* Novo ajuste para subir o conteúdo */
+		}
+				
 		.hero-logo {
 			width: 100%;
 			max-width: 420px;
@@ -315,16 +313,22 @@
 			animation: pulse 2s infinite, float 4s ease-in-out infinite;
 			filter: drop-shadow(0 0 12px rgba(255, 153, 0, 0.5));
 		}
+
 		.hero-subtitle {
-			font-size: 1.6rem;
+			font-size: 16px;
 			color: #fff;
-			background: rgba(0, 0, 0, 0.5);
-			padding: 16px 30px;
-			border-radius: 30px;
+			margin-bottom: 20px;
+			font-weight: 300;
+			text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+			position: relative;
+			z-index: 1;
+			background: rgba(0, 0, 0, 0.4);
+			padding: 8px 20px;
+			border-radius: 20px;
+			backdrop-filter: blur(5px);
 			max-width: 90%;
-			backdrop-filter: blur(6px);
-			box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 		}
+
 		.hero-socials {
 			display: flex;
 			gap: 18px;
@@ -332,6 +336,7 @@
 			flex-wrap: wrap;
 			justify-content: center;
 		}
+
 		.hero-socials .social-icon {
 			width: 52px;
 			height: 52px;
@@ -344,15 +349,19 @@
 			border-radius: 50%;
 			transition: 0.3s;
 		}
+
 		.hero-socials .social-icon.instagram {
 			background: var(--instagram-gradient);
 			color: white;
 		}
+
 		.hero-socials .social-icon:hover {
 			transform: translateY(-4px);
 			background: var(--primary);
 			color: white;
 		}		
+		
+		
 		
 		/* ===== CARROSSEL ESTILO STEAM ===== */
 		.steam-carousel {
@@ -1331,7 +1340,7 @@
 			font-size: 0.9rem;
 		}
 		
-		/* ===== RESPONSIVIDADE ===== */
+		/* ======================== RESPONSIVIDADE 992 px =========================== */
 		@media (max-width: 992px) {
 			h1 { font-size: 2.8rem; }
 			h2 { font-size: 2.2rem; }
@@ -1378,20 +1387,26 @@
 			}
 
 			/* Ajustes para o novo hero */
+			
 			.hero {
 				min-height: auto;
 				padding-top: 120px;
 				padding-bottom: 60px;
 			}
-						.hero-content {
-			  position: relative;
-			  z-index: 1;
-			  text-align: center;
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  gap: 100%;
+			
+			
+			.hero-content {
+				position: relative;
+				z-index: 1;
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 25px;
+				transform: translateY(-5%); /* Novo ajuste para subir o conteúdo */
 			}
+			
+			
 			.logo-container {
 				width: 280px;
 				height: 140px;
@@ -1402,7 +1417,9 @@
 			}
 		}
 		
-		@media (max-width: 768px) {
+		/* ======================== RESPONSIVIDADE 768 px =========================== */
+	
+	@media (max-width: 768px) {
 			
 			
 			
@@ -1442,21 +1459,20 @@
 				height: 340px; /* altura para celular */
 			}
 
-		  
-	.hero-background {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  background-image: url('assets/images/backgrounds/hero-home.jpg');
-	  background-repeat: no-repeat;
-background-position: center 70%;
-	  background-size: contain;
-	  z-index: 1;
-	}
+			.hero-background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%; /* Aumenta a altura para mostrar mais da parte inferior */
+			background-image: url('assets/images/backgrounds/hero-home.jpg');
+			background-repeat: no-repeat;
+			background-position: center 65%;
+			background-size: contain; /* Garante que a imagem cubra toda a área */
+			z-index: 1;
+		}
 
-				.hero-content {
+			.hero-content {
 			  position: relative;
 			  z-index: 1;
 			  text-align: center;
@@ -1464,10 +1480,15 @@ background-position: center 70%;
 			  flex-direction: column;
 			  align-items: center;
 			  gap: 100%;
-			}		
+			transform: translateY(-5%); /* Novo ajuste para subir o conteúdo */
+
+
+
+
+	
 			
 			.hero-subtitle {
-				font-size: 1rem;
+				font-size: 14px;
 				padding: 12px 20px;
 			}
 			.hero-logo {
@@ -1476,7 +1497,7 @@ background-position: center 70%;
 			.hero-socials .social-icon {
 				width: 45px;
 				height: 45px;
-				font-size: 15px;
+				font-size: 18px;
 			}
 			
 			
@@ -1491,7 +1512,8 @@ background-position: center 70%;
 				font-size: 20px;
 			}
 		}
-		
+/* ======================== RESPONSIVIDADE 480 px =========================== */
+
 		@media (max-width: 480px) {
 			h1 { font-size: 2.3rem; }
 			h2 { font-size: 2rem; }
@@ -1539,18 +1561,18 @@ background-position: center 70%;
 
 			/* Ajustes para o novo hero */
 			
-	.hero-background {
-	  position: bottom;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  background-image: url('assets/images/backgrounds/hero-home.jpg');
-	  background-repeat: no-repeat;
-	background-position: center 75%;
-	  background-size: contain;
-	  z-index: 1;
-	}
+		.hero-background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%; /* Aumenta a altura para mostrar mais da parte inferior */
+			background-image: url('assets/images/backgrounds/hero-home.jpg');
+			background-repeat: no-repeat;
+			background-position: center 53%;
+			background-size: contain; /* Garante que a imagem cubra toda a área */
+			z-index: 1;
+		}
 
 			.hero-content {
 			  position: relative;
@@ -1560,7 +1582,8 @@ background-position: center 70%;
 			  flex-direction: column;
 			  align-items: center;
 			  gap: 100%;
-			}
+			transform: translateY(-15%); /* Novo ajuste para subir o conteúdo */
+		}
 			
 			.logo-container {
 				width: 200px;
