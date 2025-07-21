@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 	<meta charset="utf-8"/>
@@ -190,7 +189,12 @@
 			z-index: 1000;
 			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 			backdrop-filter: blur(10px);
-			transition: var(--transition);
+			transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			transform: translateY(0);
+		}
+		
+		header.hidden {
+			transform: translateY(-100%);
 		}
 		
 		.header-container {
@@ -249,26 +253,233 @@
 			width: 100%;
 		}
 		
-		.mobile-menu {
-			display: none;
-			font-size: 1.5rem;
-			color: white;
-			cursor: pointer;
-			position: absolute;
-			right: 30px; /* Distância da direita */
-			top: 30px;   /* Distância do topo */
-			background: rgba(255, 107, 0, 0.2);
-			width: 45px;
-			height: 45px;
-			border-radius: 50%;
-			align-items: center;
-			justify-content: center;
-			transition: var(--transition);
-		}
 		
-		.mobile-menu:hover {
-			background: var(--primary);
-		}		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		.mobile-menu {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    z-index: 1100;
+    width: 30px;
+    height: 24px;
+    background: none !important; /* Remove o fundo */
+    border: none;
+    padding: 0;
+}
+
+.mobile-menu span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: white;
+    border-radius: 3px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu span:nth-child(1) {
+    top: 0px;
+}
+
+.mobile-menu span:nth-child(2) {
+    top: 10px;
+}
+
+.mobile-menu span:nth-child(3) {
+    top: 20px;
+}
+
+.mobile-menu.active span:nth-child(1) {
+    top: 10px;
+    transform: rotate(135deg);
+}
+
+.mobile-menu.active span:nth-child(2) {
+    opacity: 0;
+    left: -30px;
+}
+
+.mobile-menu.active span:nth-child(3) {
+    top: 10px;
+    transform: rotate(-135deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+		
+		
+        /* ===== ESFERAS DE DESTAQUES - CORREÇÕES ===== */
+        .highlights-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px; /* Espaçamento padrão entre esferas */
+            margin: 25px 0;
+        }
+
+        .highlight-circle {
+            width: 70px;
+            height: 70px; /* Garantindo que altura e largura sejam iguais */
+            border-radius: 50%; /* Garantindo círculo perfeito */
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 2px solid white;
+            /* Garantindo círculo perfeito em todas as telas */
+            aspect-ratio: 1/1; /* Nova propriedade para manter proporção */
+        }
+
+        .highlight-circle i {
+            font-size: 30px;
+            color: white;
+        }
+
+        .highlights-container .social-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px; /* Largura suficiente para evitar sobreposição */
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .highlights-container .social-icon span {
+            color: white;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            white-space: nowrap; /* Evita quebra de linha */
+        }
+
+        .highlights-container .social-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsividade para as esferas - Correções */
+        @media (max-width: 992px) {
+            .highlights-container {
+                gap: 20px; /* Espaçamento ligeiramente menor */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .highlights-container {
+                gap: 25px; /* Espaçamento equivalente a meia esfera */
+            }
+            .highlight-circle {
+                width: 65px;
+                height: 65px;
+            }
+            .highlight-circle i {
+                font-size: 25px;
+            }
+            .highlights-container .social-icon {
+                width: 90px;
+            }
+            .highlights-container .social-icon span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .highlights-container {
+                gap: 20px; /* Mantendo bom espaçamento */
+            }
+            .highlight-circle {
+                width: 60px;
+                height: 60px;
+            }
+            .highlight-circle i {
+                font-size: 22px;
+            }
+            .highlights-container .social-icon {
+                width: 85px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .highlights-container {
+                gap: 30px; /* Espaçamento equivalente a meia esfera em mobile */
+            }
+            .highlight-circle {
+                width: 55px;
+                height: 55px;
+            }
+            .highlight-circle i {
+                font-size: 20px;
+            }
+            .highlights-container .social-icon {
+                width: 80px;
+            }
+            .highlights-container .social-icon span {
+                font-size: 0.5rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .highlights-container {
+                gap: 12px; /* Espaçamento mínimo com bom aspecto */
+            }
+            .highlight-circle {
+                width: 50px;
+                height: 50px;
+            }
+            .highlight-circle i {
+                font-size: 18px;
+            }
+            .highlights-container .social-icon {
+                width: 75px;
+            }
+            .highlights-container .social-icon span {
+                font-size: 0.5rem;
+            }
+        }
+		
+		
+	
+
+
+
+
+	
 		
 		/* ===== HERO SECTION ===== */
 		.hero {
@@ -290,7 +501,7 @@
 			height: 90%; /* Aumenta a altura para mostrar mais da parte inferior */
 			background-image: url('assets/images/backgrounds/hero-home.jpg');
 			background-repeat: no-repeat;
-			background-position: center bottom; /* Foca na parte inferior */
+			background-position: center ; /* Foca na parte inferior */
 			background-size: cover; /* Garante que a imagem cubra toda a área */
 			z-index: 1;
 		}
@@ -314,20 +525,20 @@
 			filter: drop-shadow(0 0 12px rgba(255, 153, 0, 0.5));
 		}
 
-		.hero-subtitle {
-			font-size: 16px;
-			color: #fff;
-			margin-bottom: 20px;
-			font-weight: 300;
-			text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-			position: relative;
-			z-index: 1;
-			background: rgba(0, 0, 0, 0.4);
-			padding: 8px 20px;
-			border-radius: 20px;
-			backdrop-filter: blur(5px);
-			max-width: 90%;
-		}
+		<!-- .hero-subtitle { -->
+			<!-- font-size: 16px; -->
+			<!-- color: #fff; -->
+			<!-- margin-bottom: 20px; -->
+			<!-- font-weight: 300; -->
+			<!-- text-shadow: 0 1px 3px rgba(0,0,0,0.5); -->
+			<!-- position: relative; -->
+			<!-- z-index: 1; -->
+			<!-- background: rgba(0, 0, 0, 0.4); -->
+			<!-- padding: 8px 20px; -->
+			<!-- border-radius: 20px; -->
+			<!-- backdrop-filter: blur(5px); -->
+			<!-- max-width: 90%; -->
+		<!-- } -->
 
 		.hero-socials {
 			display: flex;
@@ -664,7 +875,7 @@
 		
 		.reels-grid {
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(4, 1fr);
 			gap: 25px;
 			margin-bottom: 50px;
 		}
@@ -676,7 +887,7 @@
 			transition: var(--transition);
 			border: 1px solid rgba(255, 255, 255, 0.05);
 			position: relative;
-			height: 600px;
+			height: 450px;
 			cursor: pointer;
 		}
 		
@@ -775,7 +986,7 @@
 		
 		.posts-grid {
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(4, 1fr);
 			gap: 25px;
 		}
 		
@@ -786,7 +997,7 @@
 			transition: var(--transition);
 			border: 1px solid rgba(255, 255, 255, 0.05);
 			position: relative;
-			height: 550px;
+			height: 250px;
 			cursor: pointer;
 		}
 		
@@ -1427,7 +1638,11 @@
 				display: flex;
 				top: 25px;
 				right: 20px;
+				display: block;
 			}
+
+			
+			
 			
 			nav ul {
 				position: absolute;
@@ -1487,10 +1702,10 @@
 
 	
 			
-			.hero-subtitle {
-				font-size: 14px;
-				padding: 12px 20px;
-			}
+			<!-- .hero-subtitle { -->
+				<!-- font-size: 14px; -->
+				<!-- padding: 12px 20px; -->
+			<!-- } -->
 			.hero-logo {
 				max-width: 240px;
 			}
@@ -1651,16 +1866,25 @@
 		}
 
 			.hero-content {
-			  position: relative;
-			  z-index: 1;
-			  text-align: center;
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  gap: 100%;
-			transform: translateY(-15%); /* Novo ajuste para subir o conteúdo */
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			transform: translateY(4%); /* Ajuste mais seguro ajuste para subir o conteúdo */
+			gap: 30px; /* Espaçamento adequado */
 		}
-				.reviews-section {
+
+		.hero-logo {
+			width: 70%;
+			max-width: 420px;
+			height: auto;
+			animation: pulse 2s infinite, float 4s ease-in-out infinite;
+			filter: drop-shadow(0 0 12px rgba(255, 153, 0, 0.5));
+		}
+		
+		.reviews-section {
 			background: rgba(30, 30, 30, 0.7);
 			border-radius: var(--border-radius);
 			padding: 10px;
@@ -1703,6 +1927,8 @@
 			}
 		}
 
+		
+		
 
 	</style>
 	</head>
@@ -1715,11 +1941,13 @@
 	<header>
 		<div class="container header-container">
 			<a class="logo" href="#">
-				<img alt="Load Games Logo" src="assets/images/logos/logo-main.png"/>
+				<img alt="Load Games Logo" src="assets/images/logos/logo-hero.png"/>
 			</a>
-			<div class="mobile-menu">
-				<i class="fas fa-bars"></i>
-			</div>
+				<div class="mobile-menu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
 			<nav>
 				<ul>
 					<li><a href="#hero">Início</a></li>
@@ -1740,15 +1968,44 @@
 	  <div class="container">
 		<div class="hero-content">
 		  <img class="hero-logo" src="assets/images/logos/logo-main.png" alt="Load Games Logo"/>
-		  <div class="hero-subtitle">
-			Consoles, acessórios e games com os melhores preços!
-		  </div>
-		  <div class="hero-socials">
-			<a class="social-icon" href="https://wa.me/551128620607" target="_blank"><i class="fab fa-whatsapp"></i></a>
-			<a class="social-icon instagram" href="https://www.instagram.com/loadgamesoficial/" target="_blank"><i class="fab fa-instagram"></i></a>
-			<a class="social-icon" href="https://www.facebook.com/loadgamesoficial" target="_blank"><i class="fab fa-facebook-f"></i></a>
-			<a class="social-icon" href="https://www.tiktok.com/@loadgamesoficial" target="_blank"><i class="fab fa-tiktok"></i></a>
-		  </div>
+		  <!-- <div class="hero-subtitle"> -->
+			<!-- Consoles, acessórios e games com os melhores preços! -->
+		  <!-- </div> -->
+                <!-- ESFERAS DE DESTAQUES (CORRIGIDAS) -->
+                <div class="highlights-container">
+                    <a class="social-icon" href="https://www.instagram.com/loadgamesoficial/" target="_blank">
+                        <div class="highlight-circle">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <span>Serviços</span>
+                    </a>
+                    <a class="social-icon" href="https://www.instagram.com/loadgamesoficial/" target="_blank">
+                        <div class="highlight-circle">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span>Antes/<br/>Depois</span>
+                    </a>
+                    <a class="social-icon" href="https://www.instagram.com/loadgamesoficial/" target="_blank">
+                        <div class="highlight-circle">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <span>Dúvidas<br/>Frequentes</span>
+                    </a>
+
+                    <a class="social-icon" href="https://www.instagram.com/loadgamesoficial/" target="_blank">
+                        <div class="highlight-circle">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <span>Dicas de<br/>Jogos</span>
+                    </a>
+					 <a class="social-icon" href="https://www.instagram.com/loadgamesoficial/" target="_blank">
+                        <div class="highlight-circle">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <span>Produtos</span>
+                    </a>
+                </div>
+  
 		</div>
 	  </div>
 	</section>
@@ -1761,7 +2018,7 @@
 		<div class="container">
 			<div class="steam-carousel" id="steamCarousel">
 				<!-- Área Principal do Slide -->
-				<div class="main-slide" style="background-image: url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1175&amp;q=80');">
+				<div class="main-slide" style="background-image: url('assets/images/carrossel/slide1.jpg');">
 					<div class="carousel-overlay"></div>
 					<div class="carousel-content">
 						<h3 id="slideTitle">Promoção de Verão</h3>
@@ -2074,7 +2331,7 @@
 			{
 				title: "Promoção de Jogos",
 				imageUrl: "assets/images/reels/reel2.jpg",
-				postUrl: "https://www.instagram.com/reel/Cg0Kz4KjK5N/",
+				postUrl: "https://www.instagram.com/p/CfWezkmO6MT/",
 				likes: "2.4K",
 				comments: "142"
 			},
@@ -2088,7 +2345,7 @@
 			{
 				title: "Tour pela Loja",
 				imageUrl: "assets/images/reels/reel4.jpg",
-				postUrl: "https://www.instagram.com/reel/CfzXkY2jJ7H/",
+				postUrl: "https://www.instagram.com/p/CewSyVQJZep/",
 				likes: "4.7K",
 				comments: "324"
 			}
@@ -2400,13 +2657,60 @@
 			}
 		}
 		
-		// Funções do menu mobile
-		document.querySelector('.mobile-menu').addEventListener('click', function() {
-			document.querySelector('nav ul').classList.toggle('active');
-			this.classList.toggle('active');
-		});
 		
-		// Smooth scrolling
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	// Corrigido: Single source para scroll behavior
+		let lastScrollTop = 0;
+		const header = document.querySelector('header');
+		const headerHeight = header.offsetHeight;
+		const scrollThreshold = 100;
+
+		window.addEventListener('scroll', function() {
+		  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+		  const menuIsOpen = document.querySelector('.mobile-menu').classList.contains('active');
+		  
+		  // Não ocultar header se o menu estiver aberto
+		  if (menuIsOpen) return;
+		  
+		  if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+			header.classList.add('hidden');
+		  } else {
+			header.classList.remove('hidden');
+		  }
+		  
+		  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+		}, { passive: true });
+
+		// Menu mobile corrigido
+		document.querySelector('.mobile-menu').addEventListener('click', function() {
+		  const navMenu = document.querySelector('nav ul');
+		  navMenu.classList.toggle('active');
+		  this.classList.toggle('active');
+		  
+		  // Mostrar header quando abrir o menu
+		  header.classList.remove('hidden');
+		});
+
+		// Fechar menu ao clicar em links
+		document.querySelectorAll('nav ul li a').forEach(link => {
+		  link.addEventListener('click', () => {
+			document.querySelector('nav ul').classList.remove('active');
+			document.querySelector('.mobile-menu').classList.remove('active');
+		  });
+		});
+
+		// Smooth scrolling corrigido
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function(e) {
 				e.preventDefault();
@@ -2425,13 +2729,20 @@
 			});
 		});
 		
-		// Inicialização
+		
+		
+		
+		
+
+
+
+
+		// Inicialização corrigida
 		window.addEventListener('load', function() {
-			adjustHeroBackground();
+			// Removida chamada duplicada de renderIndicators()
 			renderReels();
 			renderPosts();
 			renderSteamThumbnails();
-			renderIndicators();
 			goToSlide(0);
 			startAutoSlide();
 			
