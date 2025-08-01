@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Consoles, acessórios e manutenção com garantia. Visite a Load Games!" />
+    <meta name="keywords" content="videogames, consoles, assistência técnica, loja de games, Load Games" />
+    <meta name="author" content="Load Games" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Load Games - Sua Loja de Games Premium" />
+    <meta property="og:description" content="Consoles, acessórios e manutenção com garantia. Visite a Load Games!" />
+    <meta property="og:image" content="https://seudominio.com/assets/images/og-image.jpg" />
+    <meta property="og:url" content="https://seudominio.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Load Games - Sua Loja de Games Premium" />
+    <meta name="twitter:description" content="Consoles, acessórios e manutenção com garantia. Visite a Load Games!" />
+    <meta name="twitter:image" content="https://seudominio.com/assets/images/og-image.jpg" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Load Games",
+      "image": "https://seudominio.com/assets/images/logo-main.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Exemplo, 123",
+        "addressLocality": "São Paulo",
+        "addressRegion": "SP",
+        "postalCode": "00000-000",
+        "addressCountry": "BR"
+      },
+      "url": "https://seudominio.com",
+      "telephone": "+55 11 2862-0607"
+    }
+    </script>
+
+    <!-- Google Analytics (exemplo ID, troque por seu ID real) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script>
+
 	<meta charset="utf-8"/>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 	<title>Load Games - Sua Loja de Games Premium</title>
@@ -28,7 +75,9 @@
 			font-family: 'Poppins', sans-serif;
 		}
 		
-		body {
+		html { scroll-behavior: smooth; }
+
+body {
 			background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
 			color: var(--light);
 			min-height: 100vh;
@@ -55,12 +104,12 @@
 		.container {
 			max-width: 1200px;
 			margin: 0 auto;
-			padding: 0 20px;
+			padding: 0 5px;
 			box-sizing: border-box;
 		}
 		
 		section {
-			padding: 80px 0;
+			padding: 20px 0;
 		}
 
 		/* ===== PADRONIZAÇÃO DAS LATERAIS ===== */
@@ -154,7 +203,7 @@
 		.btn-outline:hover {
 			background: var(--primary);
 			color: white;
-		}
+		<!-- } -->
 
 		/* ===== ANIMAÇÕES ===== */
 		@keyframes fadeIn {
@@ -179,166 +228,220 @@
 			100% { left: 100%; }
 		}
 		
-		/* ===== HEADER ===== */
-		header {
-			background: rgba(26, 26, 26, 0.7);
-			padding: 10px 0;
-			position: fixed;
-			width: 100%;
-			top: 0;
-			z-index: 1000;
-			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-			backdrop-filter: blur(10px);
-			transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-			transform: translateY(0);
-		}
-		
-		header.hidden {
-			transform: translateY(-100%);
-		}
-		
-		.header-container {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-		.header-container .logo img {
-			height: 50px; /* menor para o menu */
-		}
-		
-		.logo {
-			display: flex;
-			align-items: center;
-			gap: 15px;
-			text-decoration: none;
-		}
-		
-		.logo img {
-			height: 65px;
-			filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));
-			transition: var(--transition);
-		}
-		
-		.logo:hover img {
-			transform: scale(1.05);
-		}
-		
-		nav ul {
-			display: flex;
-			list-style: none;
-			gap: 30px;
-		}
-		
-		nav ul li a {
-			color: var(--light);
-			text-decoration: none;
-			font-weight: 500;
-			transition: var(--transition);
-			position: relative;
-			padding: 8px 0;
-		}
-		
-		nav ul li a:after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 0;
-			height: 2px;
-			background: var(--primary);
-			transition: var(--transition);
-		}
-		
-		nav ul li a:hover:after {
-			width: 100%;
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		.mobile-menu {
-    display: none;
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 25px;
-    z-index: 1100;
-    width: 30px;
-    height: 24px;
-    background: none !important; /* Remove o fundo */
-    border: none;
-    padding: 0;
-}
+	
+	/* ==========================================================================
+			   1. CABEÇALHO / HEADER FIXO (Logo, Letreiro e Navegação)
+			   ========================================================================== */
 
-.mobile-menu span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: white;
-    border-radius: 3px;
-    opacity: 1;
-    left: 0;
-    transform: rotate(0deg);
-    transition: all 0.3s ease;
-}
+			/* 1.1 LOGO E CONTAINER PRINCIPAL */
+			header {
+			  background: rgba(255, 255, 255, 0.1);
+			  padding: 10px 0;
+			  position: fixed;
+			  width: 100%;
+			  top: 0;
+			  z-index: 1000;
+			  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+			  backdrop-filter: blur(10px);
+			  transition: transform 0.4s ease;
+			}
 
-.mobile-menu span:nth-child(1) {
-    top: 0px;
-}
+			.header-container {
+			  display: flex;
+			  justify-content: space-between;
+			  align-items: center;
+			  padding: 0 20px;
+			}
 
-.mobile-menu span:nth-child(2) {
-    top: 10px;
-}
+			/* 1.2 MENU DE NAVEGAÇÃO */
+			nav ul {
+			  display: flex;
+			  list-style: none;
+			  gap: 30px;
+			}
 
-.mobile-menu span:nth-child(3) {
-    top: 20px;
-}
+			nav ul li a {
+			  color: #fff;
+			  text-decoration: none;
+			  font-weight: 500;
+			  position: relative;
+			  padding: 8px 0;
+			  transition: all 0.3s ease;
+			}
 
-.mobile-menu.active span:nth-child(1) {
-    top: 10px;
-    transform: rotate(135deg);
-}
+			nav ul li a::after {
+			  content: '';
+			  position: absolute;
+			  bottom: 0;
+			  left: 0;
+			  width: 0;
+			  height: 2px;
+			  background: var(--primary, #ff6b00);
+			  transition: width 0.3s;
+			}
 
-.mobile-menu.active span:nth-child(2) {
-    opacity: 0;
-    left: -30px;
-}
+			nav ul li a:hover::after {
+			  width: 100%;
+			}
 
-.mobile-menu.active span:nth-child(3) {
-    top: 10px;
-    transform: rotate(-135deg);
-}
+			/* 1.2.1 BOTÃO MENU MOBILE */
+			.mobile-menu {
+			  display: none;
+			  flex-direction: column;
+			  justify-content: space-between;
+			  width: 30px;
+			  height: 24px;
+			  background: none !important;
+			  border: none;
+			  cursor: pointer;
+			  position: absolute;
+			  right: 23px;
+			  top: 23px; /* reposicionado para dentro da área cinza */
+			  z-index: 1100;
+			  padding: 0;
+			}
 
+			.mobile-menu span {
+			  display: block;
+			  height: 3px;
+			  width: 100%;
+			  background: #fff;
+			  border-radius: 3px;
+			  transition: all 0.3s ease;
+			  position: absolute;
+			  opacity: 1;
+			  left: 0;
+			  transform: rotate(0deg);
+			}
 
+			.mobile-menu span:nth-child(1) { top: 0px; }
+			.mobile-menu span:nth-child(2) { top: 10px; }
+			.mobile-menu span:nth-child(3) { top: 20px; }
 
+			.mobile-menu.active span:nth-child(1) {
+			  top: 10px;
+			  transform: rotate(135deg);
+			}
+			.mobile-menu.active span:nth-child(2) {
+			  opacity: 0;
+			  left: -30px;
+			}
+			.mobile-menu.active span:nth-child(3) {
+			  top: 10px;
+			  transform: rotate(-135deg);
+			}
 
+			/* 1.3 LETREIRO VERTICAL */
+			.vertical-marquee {
+			  background: rgba(200, 200, 200, 0.3);
+			  backdrop-filter: blur(4px);
+			  overflow: hidden;
+			  height: 36px;
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+			  border-top: 1px solid var(--primary, #ff6b00);
+			  border-bottom: 1px solid var(--primary, #ff6b00);
+			  border-radius: 6px;
+			  padding: 0 10px;
+			}
 
+			.marquee-wrapper {
+			  height: 36px;
+			  overflow: hidden;
+			  width: 100%;
+			  position: relative;
+			}
 
+			.marquee-track {
+			  display: flex;
+			  flex-direction: column;
+			  animation: scrollUpInfinite 30s linear infinite;
+			}
 
+			.marquee-item {
+			  height: 36px;
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+			  text-align: center;
+			  font-weight: 700;
+			  font-size: 0.8rem;
+			  white-space: nowrap;
+			  color: #000;
+			}
 
+			/* 1.3.1 ANIMAÇÃO DE SUBIDA INFINITA */
+			@keyframes scrollUpInfinite {
+			  0% { transform: translateY(0); }
+			  100% { transform: translateY(-50%); }
+			}
 
+			/* ==========================================================================
+			   2. VISIBILIDADE E RESPONSIVIDADE
+			   ========================================================================== */
+			.mobile-only {
+			  display: none;
+			}
+			.desktop-only {
+			  display: flex;
+			}
+			.vertical-marquee.mobile-only {
+			  display: none;
+			}
 
+			@media (max-width: 768px) {
+			  .mobile-menu {
+				display: flex;
+			  }
 
-		
-		
+			  .mobile-only {
+				display: block;
+			  }
+			  .desktop-only {
+				display: none !important;
+			  }
+
+			  .vertical-marquee.mobile-only {
+				display: block;
+			  }
+
+			  .header-container {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 10px;
+			  }
+
+			  .vertical-marquee {
+				width: 100%;
+				height: 50px;
+				font-size: 0.9rem;
+			  }
+
+			  .marquee-wrapper,
+			  .marquee-item {
+				height: 50px;
+			  }
+
+			  nav ul {
+				display: none;
+				flex-direction: column;
+				gap: 15px;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				width: 100%;
+				background: rgba(26, 26, 26, 0.95);
+				padding: 20px;
+				box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+				z-index: 1001;
+			  }
+
+			  nav ul.active {
+				display: flex;
+			  }
+			}
+			
 		
 		
         /* ===== ESFERAS DE DESTAQUES - CORREÇÕES ===== */
@@ -525,53 +628,7 @@
 			filter: drop-shadow(0 0 12px rgba(255, 153, 0, 0.5));
 		}
 
-		<!-- .hero-subtitle { -->
-			<!-- font-size: 16px; -->
-			<!-- color: #fff; -->
-			<!-- margin-bottom: 20px; -->
-			<!-- font-weight: 300; -->
-			<!-- text-shadow: 0 1px 3px rgba(0,0,0,0.5); -->
-			<!-- position: relative; -->
-			<!-- z-index: 1; -->
-			<!-- background: rgba(0, 0, 0, 0.4); -->
-			<!-- padding: 8px 20px; -->
-			<!-- border-radius: 20px; -->
-			<!-- backdrop-filter: blur(5px); -->
-			<!-- max-width: 90%; -->
-		<!-- } -->
 
-		.hero-socials {
-			display: flex;
-			gap: 18px;
-			margin-top: 15px;
-			flex-wrap: wrap;
-			justify-content: center;
-		}
-
-		.hero-socials .social-icon {
-			width: 52px;
-			height: 52px;
-			font-size: 24px;
-			background: rgba(255, 255, 255, 0.15);
-			color: var(--primary);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border-radius: 50%;
-			transition: 0.3s;
-		}
-
-		.hero-socials .social-icon.instagram {
-			background: var(--instagram-gradient);
-			color: white;
-		}
-
-		.hero-socials .social-icon:hover {
-			transform: translateY(-4px);
-			background: var(--primary);
-			color: white;
-		}		
-		
 		
 		
 		/* ===== CARROSSEL ESTILO STEAM ===== */
@@ -747,14 +804,14 @@
 		.buttons-grid {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			gap: 20px;
+			gap: 15px;
 			margin-top: 20px;
 		}
 		
 		.btn-contact {
 			background: rgba(255, 255, 255, 0.1);
 			border-radius: 12px;
-			padding: 20px;
+			padding: 15px;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -766,9 +823,14 @@
 			border: 1px solid rgba(255, 255, 255, 0.05);
 			position: relative;
 			overflow: hidden;
-			min-height: 150px;
+			<!-- min-height: 150px; -->
 			cursor: pointer;
 		}
+		
+		      
+
+           
+
 
 		/* Animação de carregamento com ondas */
 		.btn-contact::before {
@@ -794,23 +856,23 @@
 		}
 		
 		.btn-contact i {
-			font-size: 2.5rem;
-			margin-bottom: 15px;
+			font-size: 28px;
+			margin-bottom: 10px;
 			transition: var(--transition);
 			position: relative;
 			z-index: 2;
 		}
 		
 		.btn-contact .label {
-			font-weight: 600;
-			font-size: 1.1rem;
+			font-weight: 500;
+			font-size: 15px;
 			margin-bottom: 5px;
 			position: relative;
 			z-index: 2;
 		}
 		
 		.btn-contact .subtext {
-			font-size: 0.9rem;
+			font-size:12px;
 			color: #aaa;
 			position: relative;
 			z-index: 2;
@@ -1634,12 +1696,7 @@
 			
 			
 			
-			.mobile-menu {
-				display: flex;
-				top: 25px;
-				right: 20px;
-				display: block;
-			}
+	
 
 			
 			
@@ -1762,7 +1819,7 @@
 			padding: 10px;
 			background: rgba(26, 26, 26, 0.7); /* fundo escuro com transparência */
 			backdrop-filter: blur(3px);
-			z-index: 2;
+			z-index: -2;
 			
 		}
 			.post-content {
@@ -1935,30 +1992,69 @@
 	<body>
 	<div class="bg-pattern"></div>
 
-	<!-- ==========================================================================
-		 3. CABEÇALHO / HEADER FIXO (Logo e Navegação)
-		 ========================================================================== -->
-	<header>
-		<div class="container header-container">
-			<a class="logo" href="#">
-				<img alt="Load Games Logo" src="assets/images/logos/logo-hero.png"/>
-			</a>
-				<div class="mobile-menu">
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-			<nav>
-				<ul>
+	<!-- /* ========================================================================== -->
+			   <!-- 1. CABEÇALHO / HEADER FIXO (Logo, Letreiro e Navegação) -->
+			   <!-- ========================================================================== */ -->
+
+
+			<header>
+			  <div class="container header-container">
+
+				<!-- 1.1 LOGO (visível apenas no desktop) -->
+				<a class="logo desktop-only" href="#">
+				  <img loading="lazy" alt="Load Games Logo" src="assets/images/logos/logo-hero.png"/>
+				</a>
+
+				<!-- 1.2 MENU MOBILE (sempre visível) -->
+				<button class="mobile-menu" id="mobileMenu">
+				  <span></span>
+				  <span></span>
+				  <span></span>
+				</button>
+
+				<!-- 1.3 LETREIRO (somente para mobile) -->
+				<section class="vertical-marquee mobile-only">
+				  <div class="marquee-wrapper">
+					<div class="marquee-track">
+					  <!-- 5 Frases + repetição -->
+					  <div class="marquee-item">🔥 PROMOÇÕES PARA O DIA DAS CRIANÇAS!</div>
+					  <div class="marquee-item">🎮 Jogos originais com garantia!</div>
+					  <div class="marquee-item">Manutenção de Notebooks!</div>
+					  <div class="marquee-item">Troca de metal liquido PS5!</div>
+					  <div class="marquee-item">LUZ VERMELHA NO XBOX 360?</div>
+					  <div class="marquee-item">🎮 DRIFT NUNCA MAIS!</div>
+					  <div class="marquee-item">🎮 LIMPEZA E TROCA DA PASTA TERMICA!</div>
+					  <div class="marquee-item">REPARO EM PLACAS DE GAMES!</div>
+					  <div class="marquee-item">PROMOÇÃO DIA DAS CRIANÇAS É NA LOADGAMES!</div>
+					  <div class="marquee-item">💬 SUPORTE RAPIDO VIA WHATSAPP!</div>
+					    <!-- Repetição -->
+					  <div class="marquee-item">Promoções imperdíveis só na Load Games!</div>
+					  <div class="marquee-item">🎮 Jogos originais com garantia!</div>
+					  <div class="marquee-item">Manutenção de Notebooks!</div>
+					  <div class="marquee-item">Troca de metal liquido PS5!</div>
+					  <div class="marquee-item">TELAS PARA NOTEBOOKS</div>
+					  <div class="marquee-item">🎮 DRIFT NUNCA MAIS!</div>
+					  <div class="marquee-item">🎮 LIMPEZA E TROCA DA PASTA TERMICA!</div>
+					  <div class="marquee-item">REPARO EM PLACAS DE GAMES!</div>
+					  <div class="marquee-item">PROMOÇÃO DIA DAS CRIANÇAS É NA LOADGAMES!</div>
+					  <div class="marquee-item">TELAS PARA CELULAR</div>
+					</div>
+				  </div>
+				</section>
+
+				<!-- 1.2 NAVEGAÇÃO DESKTOP -->
+				<nav aria-label="Navegação principal">
+				  <ul>
 					<li><a href="#hero">Início</a></li>
 					<li><a href="#instagram-reels">Reels</a></li>
 					<li><a href="#instagram-posts">Postagens</a></li>
 					<li><a href="#reviews">Avaliações</a></li>
 					<li><a href="#locations">Lojas</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
+				  </ul>
+				</nav>
+			  </div>
+			</header>
+
 
 	<!-- ==========================================================================
 		 4. HERO (SEÇÃO PRINCIPAL)
@@ -1967,7 +2063,7 @@
 	  <div class="hero-background"></div>
 	  <div class="container">
 		<div class="hero-content">
-		  <img class="hero-logo" src="assets/images/logos/logo-main.png" alt="Load Games Logo"/>
+		  <img loading="lazy" class="hero-logo" src="assets/images/logos/logo-main.png" alt="Load Games Logo"/>
 		  <!-- <div class="hero-subtitle"> -->
 			<!-- Consoles, acessórios e games com os melhores preços! -->
 		  <!-- </div> -->
@@ -2200,7 +2296,7 @@
 							<i class="fas fa-store"></i> Campo Limpo
 						</div>
 						<div class="location-text">R. Mário Neme, 48<br/>Campo Limpo - SP</div>
-						<div class="location-note">(Travessa da estrada do campo limpo, próximo ao Banco do Brasil)<<br/><br/></div>
+						<div class="location-note">(Travessa da estrada do campo limpo, próximo ao Banco do Brasil)<br/><br/></div>
 						<a class="btn" href="https://maps.app.goo.gl/58iZjW42ngzubFZ89" target="_blank">Ver no Mapa</a>
 					</div>
 				</div>
@@ -2758,5 +2854,27 @@
 		// Eventos de redimensionamento
 		window.addEventListener('resize', adjustHeroBackground);
 	</script>
-	</body>
+	
+<!-- Chat Tawk.to -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/SEU_ID/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+</body>
+
 	</html>
+<style>
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111;
+    color: #eee;
+  }
+}
+</style>
